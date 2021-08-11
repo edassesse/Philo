@@ -6,7 +6,7 @@
 /*   By: edassess <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 17:22:48 by edassess          #+#    #+#             */
-/*   Updated: 2021/08/11 14:20:36 by edassess         ###   ########lyon.fr   */
+/*   Updated: 2021/08/11 15:29:51 by edassess         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	action_sleep(t_philo *data, int nb, int time)
 
 void	action_death(t_philo *data, int time, int nb, int add_time)
 {
-	if (get_time() + add_time > time + data->t_die)
+	if (get_time() + add_time > time + data->t_die + 1)
 	{
 		pthread_mutex_lock(&data->print);
 		data->dead = 1;

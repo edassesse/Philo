@@ -6,7 +6,7 @@
 /*   By: edassess <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 09:56:49 by edassess          #+#    #+#             */
-/*   Updated: 2021/08/11 14:20:43 by edassess         ###   ########lyon.fr   */
+/*   Updated: 2021/08/11 15:29:54 by edassess         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void	innit_struct(t_philo *data, int ac, char **av)
 	i = 0;
 	data->philo = 0;
 	data->n_philo = ft_atoi(av[1]);
-	printf("n_philo == %d\n", data->n_philo);
 	data->t_die = ft_atoi(av[2]);
 	data->t_eat = ft_atoi(av[3]);
 	data->t_sleep = ft_atoi(av[4]);
 	data->n_eat = -1;
 	data->has_eaten = 0;
 	data->dead = 0;
+	data->start = 0;
 	if (ac == 6)
 		data->n_eat = ft_atoi(av[5]);
 }
