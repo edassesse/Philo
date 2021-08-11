@@ -6,7 +6,7 @@
 /*   By: edassess <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 09:56:49 by edassess          #+#    #+#             */
-/*   Updated: 2021/08/11 15:29:54 by edassess         ###   ########lyon.fr   */
+/*   Updated: 2021/08/11 17:12:27 by edassess         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,11 @@ int	parsing(int ac, char **av, t_philo *data)
 		}
 	}
 	innit_struct(data, ac, av);
+	if (data->n_philo == 1)
+	{
+		printf("%5d philo 1 has taken a fork\n", 0);
+		printf("%5d philo 1 has died\n", data->t_die);
+		return (0);
+	}
 	return (1);
 }
