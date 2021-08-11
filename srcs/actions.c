@@ -6,7 +6,7 @@
 /*   By: edassess <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 17:22:48 by edassess          #+#    #+#             */
-/*   Updated: 2021/08/11 15:29:51 by edassess         ###   ########lyon.fr   */
+/*   Updated: 2021/08/11 16:35:50 by edassess         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	action_sleep(t_philo *data, int nb, int time)
 {
 	action_death(data, time, nb, data->t_sleep);
 	pthread_mutex_lock(&data->print);
-	printf("[%d] philo %d is sleeping\n", get_time() - data->time, nb);
+	printf("%5d philo %d is sleeping\n", get_time() - data->time, nb);
 	pthread_mutex_unlock(&data->print);
 	my_usleep(data->t_sleep);
 	pthread_mutex_lock(&data->print);
-	printf("[%d] philo %d is thinking\n", get_time() - data->time, nb);
+	printf("%5d philo %d is thinking\n", get_time() - data->time, nb);
 	pthread_mutex_unlock(&data->print);
 }
 
@@ -30,7 +30,7 @@ void	action_death(t_philo *data, int time, int nb, int add_time)
 	{
 		pthread_mutex_lock(&data->print);
 		data->dead = 1;
-		printf("[%d] philo %d has died\n", data->time - time + data->t_die, nb);
+		printf("%5d philo %d has died\n", time - data->time + data->t_die, nb);
 	}
 	return ;
 }
@@ -52,11 +52,11 @@ void	take_fork(t_philo *data, int nb, int time)
 		r_fork = 0;
 	pthread_mutex_lock(&data->fork[r_fork]);
 	pthread_mutex_lock(&data->print);
-	printf("[%d] philo %d has taken a fork\n", get_time() - data->time, nb);
+	printf("%5d philo %d has taken a fork\n", get_time() - data->time, nb);
 	pthread_mutex_unlock(&data->print);
 	pthread_mutex_lock(&data->fork[l_fork]);
 	pthread_mutex_lock(&data->print);
-	printf("[%d] philo %d has taken a 2nd fork\n", get_time() - data->time, nb);
+	printf("%5d philo %d has taken a 2nd fork\n", get_time() - data->time, nb);
 	pthread_mutex_unlock(&data->print);
 	action_death(data, time, nb, 0);
 }
@@ -73,7 +73,7 @@ void	action_eat(t_philo *data, int nb, int time)
 	action_death(data, time, nb, data->t_eat);
 	take_fork(data, nb, time);
 	pthread_mutex_lock(&data->print);
-	printf("[%d] philo %d is eating\n", get_time() - data->time, nb);
+	printf("%5d philo %d is eating\n", get_time() - data->time, nb);
 	pthread_mutex_unlock(&data->print);
 	action_death(data, time, nb, data->t_eat);
 	my_usleep(data->t_eat);

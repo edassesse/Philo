@@ -6,7 +6,7 @@
 /*   By: edassess <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:00:20 by edassess          #+#    #+#             */
-/*   Updated: 2021/08/11 15:29:49 by edassess         ###   ########lyon.fr   */
+/*   Updated: 2021/08/11 16:42:21 by edassess         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	check_eaten(t_philo *data, int nb, int t_eaten)
 	if (t_eaten == data->n_eat)
 	{
 		pthread_mutex_lock(&data->print);
-		printf("[%d] philo %d has eaten %d times\n", \
+		printf("%5d philo %d has eaten %d times\n", \
 				get_time() - data->time, nb, data->n_eat);
 		data->has_eaten++;
 		if (data->has_eaten == data->n_philo)
@@ -77,8 +77,9 @@ void	philo(t_philo *data)
 	data->start = 1;
 	while (!data->dead)
 		;
+	pthread_detach(thread_id);
 	if (data->dead == 2)
-		printf("[%d] all philos have eaten %d times\n", \
+		printf("%5d all philos have eaten %d times\n", \
 				get_time() - data->time, data->n_eat);
 	return ;
 }
