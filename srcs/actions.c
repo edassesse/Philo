@@ -6,11 +6,22 @@
 /*   By: edassess <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 17:22:48 by edassess          #+#    #+#             */
-/*   Updated: 2021/08/11 16:35:50 by edassess         ###   ########lyon.fr   */
+/*   Updated: 2021/08/11 16:54:41 by edassess         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+void	action_death(t_philo *data, int time, int nb, int add_time)
+{
+	if (get_time() + add_time > time + data->t_die + 1)
+	{
+		pthread_mutex_lock(&data->print);
+		data->dead = 1;
+		printf("%5d philo %d has died\n", time - data->time + data->t_die, nb);
+	}
+	return ;
+}
 
 void	action_sleep(t_philo *data, int nb, int time)
 {
@@ -24,21 +35,23 @@ void	action_sleep(t_philo *data, int nb, int time)
 	pthread_mutex_unlock(&data->print);
 }
 
-void	action_death(t_philo *data, int time, int nb, int add_time)
+int	check_eaten(t_philo *data, int nb, int t_eaten)
 {
-	if (get_time() + add_time > time + data->t_die + 1)
+	if (t_eaten == data->n_eat)
 	{
 		pthread_mutex_lock(&data->print);
-		data->dead = 1;
-		printf("%5d philo %d has died\n", time - data->time + data->t_die, nb);
+		printf("%5d philo %d has eaten %d times\n", \
+				get_time() - data->time, nb, data->n_eat);
+		data->has_eaten++;
+		if (data->has_eaten == data->n_philo)
+		{
+			data->dead = 2;
+			return (1);
+		}
+		pthread_mutex_unlock(&data->print);
+		return (1);
 	}
-	return ;
-}
-
-void	drop_fork(t_philo *data, int l_fork, int r_fork)
-{
-	pthread_mutex_unlock(&data->fork[l_fork]);
-	pthread_mutex_unlock(&data->fork[r_fork]);
+	return (0);
 }
 
 void	take_fork(t_philo *data, int nb, int time)
@@ -77,5 +90,6 @@ void	action_eat(t_philo *data, int nb, int time)
 	pthread_mutex_unlock(&data->print);
 	action_death(data, time, nb, data->t_eat);
 	my_usleep(data->t_eat);
-	drop_fork(data, l_fork, r_fork);
+	pthread_mutex_unlock(&data->fork[l_fork]);
+	pthread_mutex_unlock(&data->fork[r_fork]);
 }

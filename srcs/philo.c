@@ -6,30 +6,11 @@
 /*   By: edassess <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:00:20 by edassess          #+#    #+#             */
-/*   Updated: 2021/08/11 16:42:21 by edassess         ###   ########lyon.fr   */
+/*   Updated: 2021/08/11 16:54:44 by edassess         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
-
-int	check_eaten(t_philo *data, int nb, int t_eaten)
-{
-	if (t_eaten == data->n_eat)
-	{
-		pthread_mutex_lock(&data->print);
-		printf("%5d philo %d has eaten %d times\n", \
-				get_time() - data->time, nb, data->n_eat);
-		data->has_eaten++;
-		if (data->has_eaten == data->n_philo)
-		{
-			data->dead = 2;
-			return (1);
-		}
-		pthread_mutex_unlock(&data->print);
-		return (1);
-	}
-	return (0);
-}
 
 void	*thread_philo(void *vargp)
 {

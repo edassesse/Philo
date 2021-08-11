@@ -6,7 +6,7 @@
 /*   By: edassess <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 10:04:42 by edassess          #+#    #+#             */
-/*   Updated: 2021/08/11 15:29:57 by edassess         ###   ########lyon.fr   */
+/*   Updated: 2021/08/11 16:55:15 by edassess         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void		philo(t_philo *data);
 void		action_sleep(t_philo *data, int nb, int time);
 void		action_death(t_philo *data, int time, int nb, int add_time);
 void		action_eat(t_philo *data, int nb, int time);
+int			check_eaten(t_philo *data, int nb, int t_eaten);
 
 // UTILS
 
