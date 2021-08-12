@@ -6,7 +6,7 @@
 /*   By: edassess <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:00:20 by edassess          #+#    #+#             */
-/*   Updated: 2021/08/11 16:54:44 by edassess         ###   ########lyon.fr   */
+/*   Updated: 2021/08/12 23:57:19 by user             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,9 @@ void	philo(t_philo *data)
 	if (data->dead == 2)
 		printf("%5d all philos have eaten %d times\n", \
 				get_time() - data->time, data->n_eat);
+	free(data->fork);
+	while (i < data->n_philo)
+		pthread_mutex_destroy(&data->fork[i++]);
+	pthread_mutex_destroy(&data->print);
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: edassess <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 17:22:48 by edassess          #+#    #+#             */
-/*   Updated: 2021/08/11 16:54:41 by edassess         ###   ########lyon.fr   */
+/*   Updated: 2021/08/12 23:54:37 by user             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	action_death(t_philo *data, int time, int nb, int add_time)
 {
 	if (get_time() + add_time > time + data->t_die + 1)
 	{
+		my_usleep(50);
 		pthread_mutex_lock(&data->print);
 		data->dead = 1;
 		printf("%5d philo %d has died\n", time - data->time + data->t_die, nb);
